@@ -4,17 +4,17 @@ import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 
 
-fileset = Path('/home/xiexi/cuda_projects/hpc_data/').glob('*.block4')
+fileset = Path('/home/xi/cuda_projects/hpc_data/').glob('*.new_indptr')
 
 for file in fileset:
     if file.stem == 'cora_modify':
         continue
-    if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
-        continue
+    # if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
+    #     continue
     print(file.stem)
 
-    indptr = np.fromfile('/home/xiexi/cuda_projects/hpc_data/' + file.stem + ".graph.ptrdump", dtype=np.int32)
-    indices = np.fromfile('/home/xiexi/cuda_projects/hpc_data/' + file.stem + ".graph.edgedump", dtype=np.int32)
+    indptr = np.fromfile('/home/xi/cuda_projects/hpc_data/' + file.stem + ".graph.ptrdump", dtype=np.int32)
+    indices = np.fromfile('/home/xi/cuda_projects/hpc_data/' + file.stem + ".graph.edgedump", dtype=np.int32)
     v_num = len(indptr) - 1
     e_num = len(indices)
     vals = np.ones(e_num)
