@@ -2,7 +2,7 @@ from pathlib import Path
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 import torch
-import rabbit
+# import rabbit
 import matplotlib.pyplot as plt
 
 fileset = Path('/home/xiexi/py_projects/OSDI21_AE/osdi-ae-graphs').rglob('*.npz')
