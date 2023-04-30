@@ -2,19 +2,19 @@ from pathlib import Path
 from itertools import chain
 import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
+import local_setting
 
-
-fileset = Path('/home/xi/cuda_projects/hpc_data/').glob('*.new_indptr')
+fileset = Path(local_setting.base_path).glob('*.new_indptr')
 
 for file in fileset:
     if file.stem == 'cora_modify':
         continue
     # if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
-    #     continue
+        # continue
     print(file.stem)
 
-    indptr = np.fromfile('/home/xi/cuda_projects/hpc_data/' + file.stem + ".graph.ptrdump", dtype=np.int32)
-    indices = np.fromfile('/home/xi/cuda_projects/hpc_data/' + file.stem + ".graph.edgedump", dtype=np.int32)
+    indptr = np.fromfile(local_setting.base_path + file.stem + ".graph.ptrdump", dtype=np.int32)
+    indices = np.fromfile(local_setting.base_path + file.stem + ".graph.edgedump", dtype=np.int32)
     v_num = len(indptr) - 1
     e_num = len(indices)
     vals = np.ones(e_num)
