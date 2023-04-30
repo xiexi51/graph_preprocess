@@ -1,0 +1,1 @@
+base_path = '/home/xix22010/cuda_projects/hpc_data/'
