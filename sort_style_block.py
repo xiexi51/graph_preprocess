@@ -9,6 +9,10 @@ fileset = Path(local_setting.base_path).glob('*.new_indptr')
 for file in fileset:
     if file.stem == 'cora_modify':
         continue
+    # if not (file.stem == "ppi" or file.stem == "ppi"):
+    #     continue
+    # if not (file.stem == "wikikg2" or file.stem == "rabbit_wikikg2"):
+    #     continue
     # if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
     #     continue
     print(file.stem)
@@ -22,8 +26,9 @@ for file in fileset:
     print(v_num, e_num)
 
     degrees = np.ediff1d(new_csr.indptr)
-    sorted_deg_arg = np.argsort(degrees)
-    sorted_deg = degrees[sorted_deg_arg]
+    # sorted_deg_arg = np.argsort(degrees, kind="stable")
+    # sorted_deg = degrees[sorted_deg_arg]
+    sorted_deg = degrees
 
     d0_start = (degrees == 0).sum()
 
@@ -59,7 +64,7 @@ for file in fileset:
 
         if cur_degree == 0:
             cur_row += 1
-            cur_loc += 1
+            # cur_loc += 1
 
         elif cur_degree >= 1 and cur_degree <= deg_bound:
             if cur_degree >= len(warp_nz):

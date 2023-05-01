@@ -13,6 +13,8 @@ for file in fileset:
     print(file.stem)
     if file.stem[:6] == "rabbit":
         continue
+    # if file.stem != "ppi":
+    #     continue
     indptr = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.ptrdump", dtype=np.int32)
     indices = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.edgedump", dtype=np.int32)
     num_nodes = len(indptr) - 1
