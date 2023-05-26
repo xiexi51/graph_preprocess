@@ -13,6 +13,8 @@ for file in fileset:
     #     continue
     # if not (file.stem == "wikikg2" or file.stem == "rabbit_wikikg2"):
     #     continue
+    # if not (file.stem == "cora"):
+    #     continue
     # if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
     #     continue
     print(file.stem)

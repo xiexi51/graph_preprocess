@@ -10,15 +10,21 @@ fileset = Path(base_path).rglob('*.config')
 n = 0
 
 for file in fileset:
-    print(file.stem)
     if file.stem[:6] == "rabbit":
         continue
+    print(file.stem)
     # if file.stem != "ppi":
     #     continue
-    indptr = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.ptrdump", dtype=np.int32)
-    indices = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.edgedump", dtype=np.int32)
+    # indptr = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.ptrdump", dtype=np.int32)
+    # indices = np.fromfile(base_path + "rabbit_" + file.stem + ".graph.edgedump", dtype=np.int32)
+    indptr = np.fromfile(base_path + file.stem + ".graph.ptrdump", dtype=np.int32)
+    indices = np.fromfile(base_path + file.stem + ".graph.edgedump", dtype=np.int32)
     num_nodes = len(indptr) - 1
     num_edges = len(indices)
+
+    print(num_nodes)
+    print(num_edges)
+
     vals = np.ones(num_edges)
     csr = csr_matrix((vals, indices, indptr))
 

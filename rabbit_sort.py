@@ -24,6 +24,8 @@ for file in fileset:
     indices = np.fromfile(base_path + file.stem + ".graph.edgedump", dtype=np.int32)
     num_nodes = len(indptr) - 1
     num_edges = len(indices)
+
+    
     vals = np.ones(num_edges)
     csr = csr_matrix((vals, indices, indptr))
     coo = csr.tocoo()
