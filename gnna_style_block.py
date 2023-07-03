@@ -11,6 +11,8 @@ for file in fileset:
         continue
     # if not (file.stem == 'cora' or file.stem == 'youtube' or file.stem == 'artist' or file.stem == 'pubmed' or file.stem == 'reddit.dgl' or file.stem == 'ppa' or file.stem == 'protein'):
         # continue
+    if file.stem != 'reddit.dgl':
+        continue
     print(file.stem)
 
     indptr = np.fromfile(local_setting.base_path + file.stem + ".graph.ptrdump", dtype=np.int32)
@@ -24,10 +26,9 @@ for file in fileset:
     warp_loc = []
     warp_len = []
 
-    deg_bound = 12*32
-    num_warps = 12
-
-    warp_max_nz = deg_bound // num_warps
+    num_warps = 4
+    warp_max_nz = 512
+    deg_bound = num_warps * warp_max_nz
 
     cur_loc = 0
     for i in range(v_num):
@@ -65,6 +66,6 @@ for file in fileset:
 
     warp_4 = np.dstack([warp_row, warp_loc, warp_len, pad]).flatten()
 
-    warp_4.astype(np.int32).tofile('./warp_4/' + file.stem + '.warp4')
+    warp_4.astype(np.int32).tofile('./w' + str(num_warps) + '_nz' + str(warp_max_nz) + '_warp_4/' + file.stem + '.warp4')
 
 
